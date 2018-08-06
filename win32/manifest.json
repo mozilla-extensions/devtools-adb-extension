@@ -1,0 +1,9 @@
+{
+  "version": "0.12",
+  "files": [
+    "adb.exe",
+    "AdbWinApi.dll",
+    "AdbWinUsbApi.dll",
+    "fastboot.exe"
+  ]
+}
