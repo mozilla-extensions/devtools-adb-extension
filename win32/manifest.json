@@ -3,7 +3,6 @@
   "files": [
     "adb.exe",
     "AdbWinApi.dll",
-    "AdbWinUsbApi.dll",
-    "fastboot.exe"
+    "AdbWinUsbApi.dll"
   ]
 }
