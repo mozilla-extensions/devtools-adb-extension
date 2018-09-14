@@ -2,13 +2,13 @@
   "manifest_version": 2,
   "name": "ADB binary provider",
   "author": "Mozilla & Android Open Source Project",
-  "version": "1.0",
+  "version": "@@VERSION@@",
   "description": "An extension providing adb blobs for connecting to Firefox for Android",
   "applications": {
     "gecko": {
       "id": "adb@mozilla.org",
       "strict_min_version": "63.0a1",
-      "update_url": "https://ftp.mozilla.org/pub/labs/fxos-simulator/adb-helper/updates.json"
+      "update_url": "@@UPDATE_URL@@"
     }
   },
   "permissions": [
