@@ -1,0 +1,17 @@
+{
+  "addons": {
+    "adb@mozilla.org": {
+      "updates": [
+        {
+          "version": "@@VERSION@@",
+          "update_link": "@@UPDATE_LINK@@",
+          "applications": {
+            "gecko": {
+              "strict_min_version": "64.0a1"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
