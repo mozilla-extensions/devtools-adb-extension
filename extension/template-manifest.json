@@ -3,7 +3,7 @@
   "name": "ADB binary provider",
   "author": "Mozilla & Android Open Source Project",
   "version": "@@VERSION@@",
-  "description": "An extension providing adb blobs for connecting to Firefox for Android",
+  "description": "An extension providing ADB blobs for connecting to Firefox for Android",
   "applications": {
     "gecko": {
       "id": "adb@mozilla.org",
