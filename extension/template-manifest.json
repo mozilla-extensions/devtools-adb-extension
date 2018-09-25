@@ -7,7 +7,7 @@
   "applications": {
     "gecko": {
       "id": "adb@mozilla.org",
-      "strict_min_version": "63.0a1",
+      "strict_min_version": "64.0a1",
       "update_url": "@@UPDATE_URL@@"
     }
   },
