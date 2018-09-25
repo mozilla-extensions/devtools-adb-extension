@@ -1,7 +1,7 @@
 ARCHS=linux linux64 mac64 win32
 
 EXTENSION_NAME=adb-extension
-VERSION=0.0.2
+VERSION=0.0.3pre
 XPI_NAME=$(EXTENSION_NAME)-$(VERSION)
 
 ROOT_PATH=pub/labs/devtools/$(EXTENSION_NAME)
@@ -26,7 +26,6 @@ endef
 
 define clean
 	echo "Remove previous xpi files"; \
-	rm -f *.xpi \
 	rm -f **/*.xpi
 endef
 
