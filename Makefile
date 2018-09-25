@@ -1,7 +1,7 @@
 ARCHS=linux linux64 mac64 win32
 
 EXTENSION_NAME=adb-extension
-VERSION=0.0.3pre
+VERSION=0.0.3
 XPI_NAME=$(EXTENSION_NAME)-$(VERSION)
 
 ROOT_PATH=pub/labs/devtools/$(EXTENSION_NAME)
