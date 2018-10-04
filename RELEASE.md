@@ -121,7 +121,7 @@ Go edit Makefile again to bump to the next "pre" version:
 ```
 And commit and push that change to master branch:
 ```
-  $ git commit --msg "Bump to 0.12.2pre" Makefile
+  $ git commit -m "Bump to 0.12.2pre" Makefile
   $ git push upstream HEAD:master
 ```
 
