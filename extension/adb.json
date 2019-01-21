@@ -13,6 +13,11 @@
     ]
   },
   "WINNT": {
+    "aarch64": [
+      "win32/adb.exe",
+      "win32/AdbWinApi.dll",
+      "win32/AdbWinUsbApi.dll"
+    ],
     "x86": [
       "win32/adb.exe",
       "win32/AdbWinApi.dll",
