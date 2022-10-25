@@ -4,7 +4,7 @@
   "author": "Mozilla & Android Open Source Project",
   "version": "@@VERSION@@",
   "description": "An extension providing ADB binaries for Android remote debugging in Firefox DevTools. May be automatically installed when using about:debugging.",
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "adb@mozilla.org",
       "strict_min_version": "64.0a1",
