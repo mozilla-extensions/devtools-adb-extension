@@ -1,0 +1,97 @@
+#!/usr/bin/env node
+const fs = require("node:fs");
+const path = require("node:path");
+
+// Bump this version to make a new release.
+const VERSION = "0.0.6";
+const ARCHS = ["linux", "linux64", "mac64", "win32"];
+
+for (const arch of ARCHS) {
+  const extensionDir = path.resolve(__dirname, "..", "extension", arch);
+
+  fs.writeFileSync(
+    path.join(extensionDir, "manifest.json"),
+    JSON.stringify(
+      {
+        manifest_version: 2,
+        name: "Firefox DevTools ADB Extension",
+        author: "Mozilla & Android Open Source Project",
+        version: VERSION,
+        description:
+          "An extension providing ADB binaries for Android remote debugging in Firefox DevTools. May be automatically installed when using about:debugging.",
+        applications: {
+          gecko: {
+            id: "adb@mozilla.org",
+            strict_min_version: "64.0a1",
+            update_url: `https://ftp.mozilla.org/pub/labs/devtools/adb-extension/${arch}/update.json`,
+          },
+        },
+        permissions: ["mozillaAddons"],
+        homepage_url: "https://github.com/mozilla/devtools-adb-extension",
+      },
+      null,
+      2,
+    ) + "\n",
+  );
+  fs.writeFileSync(
+    path.join(extensionDir, "adb.json"),
+    JSON.stringify(
+      {
+        Linux: {
+          x86: ["linux/adb"],
+          x86_64: ["linux64/adb"],
+        },
+        Darwin: {
+          x86_64: ["mac64/adb"],
+        },
+        WINNT: {
+          x86: [
+            "win32/adb.exe",
+            "win32/AdbWinApi.dll",
+            "win32/AdbWinUsbApi.dll",
+          ],
+          x86_64: [
+            "win32/adb.exe",
+            "win32/AdbWinApi.dll",
+            "win32/AdbWinUsbApi.dll",
+          ],
+        },
+      },
+      null,
+      2,
+    ) + "\n",
+  );
+  fs.writeFileSync(
+    path.join(extensionDir, "package.json"),
+    JSON.stringify(
+      {
+        name: `adb-extension-${arch}`,
+        version: VERSION,
+        scripts: {
+          build: `zip -r adb-extension-${arch}.xpi . -x package.json -x package-lock.json`,
+        },
+      },
+      null,
+      2,
+    ) + "\n",
+  );
+  fs.writeFileSync(
+    path.join(extensionDir, "package-lock.json"),
+    JSON.stringify(
+      {
+        name: `adb-extension-${arch}`,
+        version: VERSION,
+        lockfileVersion: 3,
+        requires: true,
+        packages: {
+          "": {
+            name: `adb-extension-${arch}`,
+            version: VERSION,
+          },
+        },
+      },
+      null,
+      2,
+    ) + "\n",
+  );
+}
