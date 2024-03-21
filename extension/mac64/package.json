@@ -1,0 +1,7 @@
+{
+  "name": "adb-extension-mac64",
+  "version": "0.0.6",
+  "scripts": {
+    "build": "zip -r adb-extension-mac64.xpi . -x package.json -x package-lock.json"
+  }
+}

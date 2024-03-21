@@ -1,1 +1,0 @@
-This folder contains the built XPIs for the adb extension.

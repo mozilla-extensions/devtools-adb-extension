@@ -1,0 +1,27 @@
+{
+  "Linux": {
+    "x86": [
+      "linux/adb"
+    ],
+    "x86_64": [
+      "linux64/adb"
+    ]
+  },
+  "Darwin": {
+    "x86_64": [
+      "mac64/adb"
+    ]
+  },
+  "WINNT": {
+    "x86": [
+      "win32/adb.exe",
+      "win32/AdbWinApi.dll",
+      "win32/AdbWinUsbApi.dll"
+    ],
+    "x86_64": [
+      "win32/adb.exe",
+      "win32/AdbWinApi.dll",
+      "win32/AdbWinUsbApi.dll"
+    ]
+  }
+}
