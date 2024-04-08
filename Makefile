@@ -1,60 +1,44 @@
 ARCHS=linux linux64 mac64 win32
 
 EXTENSION_NAME=adb-extension
-VERSION=0.0.6pre
-XPI_NAME=$(EXTENSION_NAME)-$(VERSION)
+# Please keep only three parts in the value of this `VERSION` variable.
+# `build-xpis` below will automatically add a forth part.
+VERSION=0.0.7
 
 ROOT_PATH=pub/labs/devtools/$(EXTENSION_NAME)
 ROOT_UPDATE_URL=https://ftp.mozilla.org/$(ROOT_PATH)
-S3_BASE_URL=s3://net-mozaws-prod-delivery-contrib/$(ROOT_PATH)
 
 define build-xpis
 	pushd extension; \
+	index=0; \
 	for arch in $(ARCHS); do \
+		xpi_name=$(EXTENSION_NAME)-$(VERSION).$$index; \
+		echo "[release-$$arch] Create dist/$$arch/ folder"; \
+		mkdir -p ../dist/$$arch; \
 		echo "[release-$$arch] Create manifest.json"; \
 		sed \
+			-e "s#@@ARCH@@#$$arch#" \
 			-e "s#@@UPDATE_URL@@#$(ROOT_UPDATE_URL)/$$arch/update.json#" \
-			-e "s#@@VERSION@@#$(VERSION)#" \
+			-e "s#@@VERSION@@#$(VERSION).$$index#" \
 			template-manifest.json > manifest.json; \
-		echo "[release-$$arch] ZIP to $(XPI_NAME)-$$arch.xpi"; \
-		zip ../dist/$(XPI_NAME)-$$arch.xpi -r $$arch adb.json manifest.json; \
+		echo "[release-$$arch] ZIP to $$xpi_name-$$arch.xpi"; \
+		zip ../dist/$$arch/$$xpi_name-$$arch.xpi -r $$arch adb.json manifest.json; \
 		echo "[release-$$arch] Delete temporary manifest.json"; \
 		rm manifest.json; \
+		echo "[release-$$arch] Create update.json"; \
+		sed \
+			-e "s#@@UPDATE_LINK@@#$(ROOT_UPDATE_URL)/$$arch/$$xpi_name-$$arch.xpi#" \
+			-e "s#@@VERSION@@#$(VERSION).$$index#" \
+			../template-update.json > ../dist/$$arch/update.json; \
+		index=$$((index + 1)); \
 	done; \
 	popd
 endef
 
 define clean
-	echo "Remove previous xpi files"; \
-	rm -f **/*.xpi
-endef
-
-define release
-	pushd dist; \
 	for arch in $(ARCHS); do \
-		echo "[release-$$arch] Sign .xpi"; \
-		../sign.sh $(XPI_NAME)-$$arch.xpi; \
-		echo "[release-$$arch] Upload .xpi"; \
-		aws s3 cp \
-			$(XPI_NAME)-$$arch.xpi \
-			$(S3_BASE_URL)/$$arch/$(XPI_NAME)-$$arch.xpi; \
-		echo "[release-$$arch] Copy to 'latest' .xpi"; \
-		aws s3 cp \
-			$(S3_BASE_URL)/$$arch/$(XPI_NAME)-$$arch.xpi \
-			$(S3_BASE_URL)/$$arch/adb-extension-latest-$$arch.xpi; \
-		echo "[release-$$arch] Create update.json"; \
-		sed \
-			-e "s#@@UPDATE_LINK@@#$(ROOT_UPDATE_URL)/$$arch/$(XPI_NAME)-$$arch.xpi#" \
-			-e "s#@@VERSION@@#$(VERSION)#" \
-			../template-update.json > update.json; \
-		echo "[release-$$arch] Upload update.json"; \
-		aws s3 cp --cache-control max-age=3600 \
-			update.json \
-			$(S3_BASE_URL)/$$arch/update.json; \
-		echo "[release-$$arch] Delete temporary update.json"; \
-		rm update.json; \
-	done; \
-	popd
+		rm -rf dist/$$arch/; \
+	done
 endef
 
 package:
@@ -63,6 +47,3 @@ package:
 
 clean:
 	@$(call clean)
-
-release:
-	@$(call release)
