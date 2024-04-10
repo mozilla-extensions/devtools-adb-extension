@@ -24,8 +24,9 @@ It provides ADB binaries used by DevTools to connect to Firefox/GeckoView produc
         └── update.json
     ```
 
-3. Upload the different XPI files to AMO (as unlisted versions). Download the signed XPI files.
-4. Upload the signed XPI files and their `update.json` files to the FTP server.  Note that we'll want to upload the versioned XPIs (e.g. `adb-extension-0.0.7.3-win32.xpi`) as well as "latest" copies (e.g. `adb-extension-latest-win32.xpi`).
+3. Upload the different XPI files to AMO as unlisted versions. You MUST respect the order of the versions, i.e start with `linux` (because its version is `0.0.7.0`), then `linux64` (because its version is `0.0.7.1`), etc.
+4. Download the signed XPI files. Note that AMO changes the name of the signed XPIs so you have to rename each file individually. For example, uploading `adb-extension-0.0.7.0-linux.xpi` will produce a signed file named `27a75f558d3c46da8dcd-0.0.7.0.xpi`, which you'll need to rename to `adb-extension-0.0.7.0-linux.xpi`.
+5. Upload the signed XPI files and their `update.json` files to the FTP server.  Note that we'll want to upload the versioned XPIs (e.g. `adb-extension-0.0.7.3-win32.xpi`) as well as "latest" copies (e.g. `adb-extension-latest-win32.xpi`).
 
 ### Discussion
 
