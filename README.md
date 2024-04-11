@@ -48,7 +48,7 @@ It provides ADB binaries used by DevTools to connect to Firefox/GeckoView produc
     └── win32
         ├── adb-extension-0.0.7.3-win32.xpi
         ├── adb-extension-latest-win32.xpi
-    └── update.json
+        └── update.json
     ```
 
 ### Discussion
