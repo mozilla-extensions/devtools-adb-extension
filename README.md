@@ -9,7 +9,7 @@ It provides ADB binaries used by DevTools to connect to Firefox/GeckoView produc
 2. Run `make package`. The following files should have been generated in the `dist/` folder:
 
     ```
-    dist
+    $ tree dist
     ├── linux
     │   ├── adb-extension-0.0.7.0-linux.xpi
     │   └── update.json
@@ -32,7 +32,7 @@ It provides ADB binaries used by DevTools to connect to Firefox/GeckoView produc
     # IMPORTANT: all the XPI files here are signed. They are not the same as above in Step 2.
     # The `update.json` files are coming from the Step 2, though.
 
-    adb-0.0.7
+    $ tree adb-0.0.7
     ├── linux
     │   ├── adb-extension-0.0.7.0-linux.xpi
     │   ├── adb-extension-latest-linux.xpi
@@ -49,6 +49,20 @@ It provides ADB binaries used by DevTools to connect to Firefox/GeckoView produc
         ├── adb-extension-0.0.7.3-win32.xpi
         ├── adb-extension-latest-win32.xpi
         └── update.json
+
+    # For each "arch", the "latest" XPI should be the same as the versioned one.
+    $  sha256sum */*.xpi
+    fb53093a114d074b44fae57b6c1333d2c05a16490de61851d9f9c68584c5131e  linux/adb-extension-0.0.7.0-linux.xpi
+    fb53093a114d074b44fae57b6c1333d2c05a16490de61851d9f9c68584c5131e  linux/adb-extension-latest-linux.xpi
+
+    9f94434cc0aff1dc24afd10b3dce80429a287cfb82ab8dcee454c2f0210e98d6  linux64/adb-extension-0.0.7.1-linux64.xpi
+    9f94434cc0aff1dc24afd10b3dce80429a287cfb82ab8dcee454c2f0210e98d6  linux64/adb-extension-latest-linux64.xpi
+
+    4777e776d7d33e8998f2121168541f23a4d351e4cd526a945d1ea438ee25f478  mac64/adb-extension-0.0.7.2-mac64.xpi
+    4777e776d7d33e8998f2121168541f23a4d351e4cd526a945d1ea438ee25f478  mac64/adb-extension-latest-mac64.xpi
+    
+    4ed47f030b24abb6de904b25e7cdff8d5475d7e1a6b0bbc581162bc3bc35826b  win32/adb-extension-0.0.7.3-win32.xpi
+    4ed47f030b24abb6de904b25e7cdff8d5475d7e1a6b0bbc581162bc3bc35826b  win32/adb-extension-latest-win32.xpi
     ```
 
 ### Discussion
