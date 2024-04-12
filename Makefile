@@ -3,7 +3,7 @@ ARCHS=linux linux64 mac64 win32
 EXTENSION_NAME=adb-extension
 # Please keep only three parts in the value of this `VERSION` variable.
 # `build-xpis` below will automatically add a forth part.
-VERSION=0.0.7
+VERSION=0.0.8
 
 ROOT_PATH=pub/labs/devtools/$(EXTENSION_NAME)
 ROOT_UPDATE_URL=https://ftp.mozilla.org/$(ROOT_PATH)
